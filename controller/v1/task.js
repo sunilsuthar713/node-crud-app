@@ -2,6 +2,8 @@ const logger = require("../../config/logger").getLogger();
 const { httpResponder } = require("../../utils");
 const TaskService = require("../../service").task;
 
+const ts = new TaskService();
+
 const createTask = async (req, res, next) => {
     try {
         let body = req.body;
@@ -9,7 +11,7 @@ const createTask = async (req, res, next) => {
             logger.error("Missing title in the create task request")
             return httpResponder.sendError(res, Error("missing required parameters"), 400)
         }
-        const result = await new TaskService().createTask(body.title, body?.description);
+        const result = await ts.createTask(body.title, body?.description);
         return httpResponder.sendSuccess(res, result);
     } catch (err) {
         logger.error("Error in creating task:", err);

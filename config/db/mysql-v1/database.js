@@ -29,7 +29,7 @@ const getDbInstance = async () => {
 
 const syncDb = () => {
     // Ensuring db has all tables required
-    models['task'] = sequelize.define("Task", task);
+    models['Task'] = sequelize.define("Task", task);
     sequelize
         .sync()
         .then(() => {
